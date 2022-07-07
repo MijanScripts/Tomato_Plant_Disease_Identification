@@ -2,8 +2,10 @@ import streamlit.components.v1 as components #html extensions
 from streamlit_option_menu import option_menu
 import streamlit as st
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageOps
 import base64
+from time import sleep
+from stqdm import stqdm
 
 
 import pickle
@@ -17,9 +19,11 @@ MODEL = keras.models.load_model("model.h5")
 
 def predictions(input_image):
     from tensorflow.keras.preprocessing import image as imag
-    img=imag.load_img(input_image , target_size=(224,224))
+    # img=imag.load_img(input_image , target_size=(224,224))
+    size = (224, 224)
+    img = ImageOps.fit(input_image, size, Image.ANTIALIAS)
 
-    X = image.img_to_array(img)
+    X = np.asarray(img)
     X =np.expand_dims(X,axis=0)
     
     classes = MODEL.predict(X)
@@ -28,7 +32,7 @@ def predictions(input_image):
 
 st.set_page_config(page_title="PlantAI", page_icon='tree-fill')
 
-def set_bg_hack(main_bg):
+def set_bg_hack(main_bg, ext):
     '''
     A function to unpack an image from root folder and set as bg.
  
@@ -37,7 +41,7 @@ def set_bg_hack(main_bg):
     The background.
     '''
     # set bg name
-    main_bg_ext = "img"
+    main_bg_ext = ext
         
     st.markdown(
          f"""
@@ -79,14 +83,14 @@ def result_output(classes):
         return result
 
 if page_selection == 'Home Page':
-    set_bg_hack('images/bak_img4.jpg')
+    set_bg_hack('images/giphy2.gif',ext="gif")
     # st.markdown('<style>' + open('icon.css').read() + '</style>', unsafe_allow_html=True)
     original_titl = '<p style="font-family:sans-serif; color:White; font-size: 50px;">Some short intro about the app and what it does would go here</p>'
     st.markdown(original_titl, unsafe_allow_html=True)
 
 
 elif page_selection == 'Plant Disease Identifier':
-    set_bg_hack('images/bak_img9.jpg')
+    set_bg_hack('images/bak_img4.jpg',ext="jpg")
     choice =st.selectbox("How would you like to upload your picture",['File Upload', 'Camera'])
     if choice == 'File Upload':
 
@@ -98,7 +102,7 @@ elif page_selection == 'Plant Disease Identifier':
                 
                 image_data = img_file_buffer.read()
                 # img = imag.load_img(image_data)
-                imagess = np.array(Image.open(img_file_buffer))
+                imagess = Image.open(img_file_buffer)
                 st.success("Image uploaded")    
                 preview=st.button('Preview')
                 if preview:
@@ -107,10 +111,10 @@ elif page_selection == 'Plant Disease Identifier':
                     st.image(imagess)
                 identify = st.button("Identify")
                 if identify:
-                    classes = predictions(image_data)
-                    # with st.sidebar:
-                    #     st.image(imagess)
-                    #     # result_output(classes)
+                    classes = predictions(imagess)
+                    with st.sidebar:
+                        st.image(imagess)
+                        result_output(classes)
 
     if choice == 'Camera':
         
