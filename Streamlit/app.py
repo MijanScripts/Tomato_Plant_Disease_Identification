@@ -1,5 +1,7 @@
 # Contents of ~/my_app/streamlit_app.py
 import streamlit as st
+from classification import teachable_model
+from PIL import Image
 
 #Page Title
 st.set_page_config(page_title="AGROSMART AI", page_icon='tomato')
@@ -23,23 +25,32 @@ def main_page():
     #st.markdown("# Main page")
     #st.sidebar.markdown("# Main page")
 
+file_weight = '../CNN_Model/model.h5'
 def page2():
     col1, col2 = st.columns([3,2])
     with col1:
         st.title ("Plant Disease Identifier App")
-        image = st.file_uploader("Upload your photo", type=['jpg', 'png'])
+        uploaded_file = st.file_uploader("Upload your photo", type=['jpg', 'png'])
         picture = st.camera_input("Take a picture")
-        #if picture:
-            #st.image(picture)
-    with col2:
-        st.title ("Results Panel") 
-        if image:
-            st.success("Image uploaded sucessfully")
-            st.image(image) 
-        if picture:
-            st.success("Image uploaded sucessfully")
-            st.image(picture)   
-    #st.markdown("# Page 2 ❄️")
+        if uploaded_file is not None:
+            image = Image.open(uploaded_file)
+            st.image(image, caption='Uploaded Image.', use_column_width=True)
+            st.write("")
+            st.write("Classifying...")
+            label = teachable_model(image, file_weight)
+            if label == 0:
+                st.write("The plant is unhealthy")
+            else:
+                st.write("The plant leaf is healthy")
+    # with col2:
+    #     st.title ("Results Panel") 
+    #     if image:
+    #         st.success("Image uploaded sucessfully")
+    #         st.image(image) 
+    #     if picture:
+    #         st.success("Image uploaded sucessfully")
+    #         st.image(picture)   
+    # #st.markdown("# Page 2 ❄️")
     #st.sidebar.markdown("# Page 2")
 
 def page3():
@@ -59,7 +70,7 @@ def page3():
 
     from PIL import Image
     with st.container():
-        image = Image.open("/Users/user/Documents/Explore/My practice/Classification app/Team.png")
+        image = Image.open("./Team.png")
         st.image(image, use_column_width=True) 
     #st.markdown("# Page 3")
     #st.sidebar.markdown("# Page 3")
