@@ -1,3 +1,4 @@
+from sqlalchemy import null
 import streamlit.components.v1 as components #html extensions
 from streamlit_option_menu import option_menu
 import streamlit as st
@@ -15,18 +16,17 @@ from keras.models import model_from_json
 from keras.preprocessing import image as imag
 import numpy as np
 
+# load json and create model
 def teachable_model(img, weight_file):
-    #Load Model
-#     json_file = open('../CNN_Model/model.json', 'r')
     json_file = open('mobile_net_model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     loaded_model = model_from_json(loaded_model_json,custom_objects={'KerasLayer': hub.KerasLayer})
-    # /model = loaded_model.load_weights(weight_file)
+    # Creating a model using json 
     loaded_model.load_weights(weight_file)
     
   # Create the array of the right shape to feed into the keras model
-    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+    data = np.ndarray(shape=(null, 224, 224, 3), dtype=np.float32)
     image = img
 
     #image sizing
@@ -39,18 +39,11 @@ def teachable_model(img, weight_file):
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
-    # Load the image into the array
-    # data[0] = normalized_image_array
-
-    # run the inference
-    # prediction = model.predict(data[0])
+    # predicting using the processed image data in the form of an array
     prediction = loaded_model.predict(X)
     return prediction # return position of the highest probability
 
-
-
-
-
+# URL for Mobilenet model
 URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
 #MODEL = keras.models.load_model("mobile_net_model.h5", custom_objects={'KerasLayer': hub.KerasLayer(URL, input_shape = (224, 224, 3))})
 
@@ -66,7 +59,7 @@ URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
     #classes = MODEL.predict(X)
     #return classes
 
-
+# Setting up the background on Streamlit app
 st.set_page_config(page_title="PlantAI", page_icon='tree-fill')
 
 def set_bg_hack(main_bg, ext):
@@ -92,6 +85,7 @@ def set_bg_hack(main_bg, ext):
          unsafe_allow_html=True
      )
 
+# Setting up the options menu
 page_selection = option_menu(
         menu_title = "TOMATO PLANT DISEASE IDENTIFIER APP", 
         options = ["Home Page","Plant Disease Identifier","About"],
@@ -110,7 +104,7 @@ page_selection = option_menu(
             'nav-link-selected': {'background-color': '#04AD21'},
         }
     )
-
+# predicting whether leaf is healthy or not after uploading an image
 def result_output(prediction):
     for predict in prediction:
         if predict[0]==1.0:
@@ -118,6 +112,10 @@ def result_output(prediction):
         else:
             result=st.subheader("High Probability of a Disease\n You should be worried")
         return result
+        
+'''The code below sets up the Home page, Plant Identier page and About page. 
+    Creates a provison for either taking a photo of the leaf or uploading a 
+    photo from saved files on the identifier page. '''
 
 if page_selection == 'Home Page':
     set_bg_hack('images/giphy2.gif',ext="gif")
@@ -125,11 +123,10 @@ if page_selection == 'Home Page':
     original_titl = '<p style="font-family:sans-serif; color:White; font-size: 50px;">Leveraging on AI to aid farmers in detecting plant diseases</p>'
     st.markdown(original_titl, unsafe_allow_html=True)
 
-
 elif page_selection == 'Plant Disease Identifier':
     set_bg_hack('images/bak_img4.jpg',ext="jpg")
     choice =st.selectbox("How would you like to upload your picture",['File Upload', 'Camera'])
-    if choice == 'File Upload':
+    if choice == 'File Upload': # Uploading from saved files
 
         img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
         
@@ -143,7 +140,7 @@ elif page_selection == 'Plant Disease Identifier':
                 st.success("Image uploaded")    
                 preview=st.button('Preview')
                 if preview:
-                    original_title = '<p style="font-family:sans-serif; color:Green; font-size: 50px;">Image Preview</p>'
+                    original_title = '<p style="font-family:sans-serif; color:white; font-size: 15px;">Image Preview</p>'
                     st.markdown(original_title, unsafe_allow_html=True)
                     st.image(imagess)
                 identify = st.button("Identify")
@@ -153,7 +150,7 @@ elif page_selection == 'Plant Disease Identifier':
                         st.image(imagess)
                         result_output(classes)
 
-    if choice == 'Camera':
+    if choice == 'Camera': # Capturing a photo
         
         img_camera_buffer = st.camera_input("Take a Picture")
         if img_camera_buffer is not None:
@@ -209,7 +206,7 @@ elif page_selection == 'About':
    
 
 
-def sidebar_bg(side_bg):
+def sidebar_bg(side_bg): # a sidebar that shows predicted results
 
    side_bg_ext = 'jpg'
 
