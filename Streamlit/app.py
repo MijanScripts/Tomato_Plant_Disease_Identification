@@ -2,34 +2,11 @@ import streamlit.components.v1 as components #html extensions
 from streamlit_option_menu import option_menu
 import streamlit as st
 import numpy as np
-from PIL import Image, ImageOps
 import base64
+from PIL import Image 
 from time import sleep
 from stqdm import stqdm
-
-
-import pickle
-from tensorflow import keras
-from tensorflow.keras.preprocessing import image as imag
-
-
-import numpy as np
-
-MODEL = keras.models.load_model("model.h5")
-
-def predictions(input_image):
-    from tensorflow.keras.preprocessing import image as imag
-    # img=imag.load_img(input_image , target_size=(224,224))
-    size = (224, 224)
-    img = ImageOps.fit(input_image, size, Image.ANTIALIAS)
-
-    X = np.asarray(img)
-    X =np.expand_dims(X,axis=0)
-    
-    classes = MODEL.predict(X)
-    return classes
-
-
+from Notebook import teachable_model
 st.set_page_config(page_title="PlantAI", page_icon='tree-fill')
 
 def set_bg_hack(main_bg, ext):
@@ -74,13 +51,13 @@ page_selection = option_menu(
         }
     )
 
-def result_output(classes):
-    for classs in classes:
-        if classs[0]==1.0:
-            result=st.subheader("Not a Disease\n Calm your nerves")
-        else:
-            result=st.subheader("High Probability of a Disease\n You should be worried")
-        return result
+# def result_output(classes):
+#     for classs in classes:
+#         if classs[0]==1.0:
+#             result=st.subheader("Not a Disease\n Calm your nerves")
+#         else:
+#             result=st.subheader("High Probability of a Disease\n You should be worried")
+#         return result
 
 if page_selection == 'Home Page':
     set_bg_hack('images/giphy2.gif',ext="gif")
@@ -102,19 +79,20 @@ elif page_selection == 'Plant Disease Identifier':
                 
                 image_data = img_file_buffer.read()
                 # img = imag.load_img(image_data)
-                imagess = Image.open(img_file_buffer)
+                imagess = Image.open(img_file_buffer,'r')
                 st.success("Image uploaded")    
                 preview=st.button('Preview')
                 if preview:
                     original_title = '<p style="font-family:sans-serif; color:Green; font-size: 50px;">Image Preview</p>'
                     st.markdown(original_title, unsafe_allow_html=True)
+                                    
                     st.image(imagess)
                 identify = st.button("Identify")
                 if identify:
-                    classes = predictions(imagess)
+                    result = teachable_model(imagess,"model_weights.h5")
                     with st.sidebar:
                         st.image(imagess)
-                        result_output(classes)
+                        st.subheader(result)
 
     if choice == 'Camera':
         
