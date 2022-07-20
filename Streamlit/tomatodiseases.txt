@@ -1,0 +1,10 @@
+'tomatoes_Bacterial_spot': 0,
+ 'tomatoes_Early_blight': 1,
+ 'tomatoes_Late_blight': 2,
+ 'tomatoes_Leaf_Mold': 3,
+ 'tomatoes_Septoria_leaf_spot': 4,
+ 'tomatoes_Spider_mites Two-spotted_spider_mite': 5,
+ 'tomatoes_Target_Spot': 6,
+ 'tomatoes_Tomato_Yellow_Leaf_Curl_Virus': 7,
+ 'tomatoes_Tomato_mosaic_virus': 8,
+ 'tomatoes_healthy': 9}

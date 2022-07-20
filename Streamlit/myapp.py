@@ -1,12 +1,12 @@
 # Contents of ~/my_app/streamlit_app.py
 import streamlit as st
-<<<<<<< Updated upstream
-=======
 import numpy as np
 from PIL import Image, ImageOps
 import base64
 from time import sleep
 from stqdm import stqdm
+from streamlit_option_menu import option_menu
+import streamlit.components.v1 as components
 
 
 import pickle
@@ -187,7 +187,6 @@ def sidebar_bg(side_bg):
       """,
       unsafe_allow_html=True,
       )
->>>>>>> Stashed changes
 
 #Page Title
 st.set_page_config(page_title="AGROSMART AI", page_icon='tomato')
