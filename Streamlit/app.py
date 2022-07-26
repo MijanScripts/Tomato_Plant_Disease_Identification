@@ -1,12 +1,16 @@
+from turtle import width
 import streamlit.components.v1 as components #html extensions
 from streamlit_option_menu import option_menu
 import streamlit as st
 import numpy as np
 import base64
+import io
 from PIL import Image 
 from time import sleep
 from stqdm import stqdm
 from Notebook import teachable_model
+
+
 st.set_page_config(page_title="PlantAI", page_icon='tree-fill')
 
 def set_bg_hack(main_bg, ext):
@@ -66,33 +70,39 @@ if page_selection == 'Home Page':
     st.markdown(original_titl, unsafe_allow_html=True)
 
 
+                    
 elif page_selection == 'Plant Disease Identifier':
     set_bg_hack('images/bak_img4.jpg',ext="jpg")
     choice =st.selectbox("How would you like to upload your picture",['File Upload', 'Camera'])
     if choice == 'File Upload':
-
-        img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
         
-        if img_file_buffer is not None:
-            c1,c2 = st.columns([2,1])
-            with c1:
-                
-                image_data = img_file_buffer.read()
-                # img = imag.load_img(image_data)
-                imagess = Image.open(img_file_buffer,'r')
-                st.success("Image uploaded")    
-                preview=st.button('Preview')
-                if preview:
-                    original_title = '<p style="font-family:sans-serif; color:Green; font-size: 50px;">Image Preview</p>'
-                    st.markdown(original_title, unsafe_allow_html=True)
-                                    
-                    st.image(imagess)
-                identify = st.button("Identify")
-                if identify:
-                    result = teachable_model(imagess,"model_weights.h5")
+        # img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
+        uploaded_files = st.file_uploader("Upload an Image",type=['jpg','jpeg','png'],help="You can only upload images in the format .jpg, .jpeg, .png", accept_multiple_files=True,)
+        with st.expander("Preview Images"):
+            jpegs =[]
+            for i in uploaded_files:
+                jpegs.append(i)
+            st.image(jpegs,width=100)        # preview = st.button("Preview")
+ 
+        if st.button("Click Here To Classify"):
+            if uploaded_files is not None:
+                l=[]
+                n=[]
+                for uploaded_file in uploaded_files:
+                    bytes_datas = uploaded_file.read()
+                    images = Image.open(io.BytesIO(bytes_datas))
+                    with st.spinner("Classifying...."):
+                        result = teachable_model(images,"model_weights.h5")
+                        l.append(result)
+                        n.append(images)
+                st.success("Done")
+                for i in range(len(l)):
                     with st.sidebar:
-                        st.image(imagess)
-                        st.subheader(result)
+                        st.image(n[i])
+                        st.button(l[i])
+            elif uploaded_files[0] is None:
+                st.subheader("Please Upload an Image to Classify")
+    
 
     if choice == 'Camera':
         
