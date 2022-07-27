@@ -9,6 +9,7 @@ from PIL import Image
 from time import sleep
 from stqdm import stqdm
 from Notebook import teachable_model
+import webbrowser
 
 
 st.set_page_config(page_title="PlantAI", page_icon='tree-fill')
@@ -99,7 +100,19 @@ elif page_selection == 'Plant Disease Identifier':
                 for i in range(len(l)):
                     with st.sidebar:
                         st.image(n[i])
-                        st.button(l[i])
+                        if st.button(l[i]):
+                            links = {"Tomatoes Tomato Yellow Leaf Curl Virus": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.f0773v3deci0",
+                                    "Tomatoes Tomato mosaic virus" :"https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.ei9o903oddv",
+                                    "Tomatoes Early blight": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.lqgbw76q2m1u",
+                                    "Tomatoes Leaf Mold": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.4r9oqkrzr35r",
+                                    "Tomatoes Septoria leaf spot": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.q2adooq70uwq",
+                                    "Tomatoes Target Spot": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.d2iojoi9olj",
+                                    "Tomatoes Bacterial spot": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.hp0440btrum1",
+                                    "Tomatoes Late blight": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.4sdhpp6kxm6",
+                                    "Tomatoes Spider mites Two-spotted spider mite": "https://docs.google.com/document/d/1uEupeEhNB8-cQSnLCRTMuoydM9XgxzSaFczPpx0eMrg/edit#heading=h.rv23086m7rit"
+}                           
+                            for i in links:
+                                webbrowser.open_new_tab(links[i])
             elif uploaded_files[0] is None:
                 st.subheader("Please Upload an Image to Classify")
     
