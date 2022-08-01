@@ -67,8 +67,11 @@ page_selection = option_menu(
 if page_selection == 'Home Page':
     set_bg_hack('images/giphy2.gif',ext="gif")
     # st.markdown('<style>' + open('icon.css').read() + '</style>', unsafe_allow_html=True)
-    original_titl = '<p style="font-family:sans-serif; color:White; font-size: 50px;">Some short intro about the app and what it does would go here</p>'
+    # INTRO ON HOMEPAGE
+    original_titl = '<p style="font-family:sans-serif; color:White; font-size: 60px;">Welcome to Tomato Plant Disease Identifier AI...</p>'
     st.markdown(original_titl, unsafe_allow_html=True)
+    original_titl1 = '<p style="font-family:sans-serif; color:White; font-size: 30px;">Discover Machine Learning technology that aids you in detecting tomato plant diseases.</p>'
+    st.markdown(original_titl1, unsafe_allow_html=True)
 
 
                     
@@ -144,7 +147,29 @@ elif page_selection == 'Plant Disease Identifier':
     components.html(pil_string)
     # st.markdown(html_string,unsafe_allow_html=True)
 
+# THE ABOUT PAGE
+elif page_selection == 'About':
+    set_bg_hack('images/bak_img4.jpg',ext="jpg")
+    def header(url):
+        option = st.markdown(f'<p style="color:white;font-size:15px;border-radius:2%;">{url}</p>', unsafe_allow_html=True)
+        return option
+    header('Discover AGROSMART ')
 
+
+    with st.expander('What we do'):
+        st.markdown(
+            """
+                                    Welcome to AGROSMART! 
+            
+            We provide AI-driven smart farming and precision agriculture solutions to help farmers save costs and open new business opportunities.
+"""
+) 
+    st.info("Meet The Team!")
+
+    from PIL import Image
+    with st.container():
+        image = Image.open("C:/Users/user/Documents/GitHub/Tomato_Plant_Disease_Identification/Streamlit/Team.png")
+        st.image(image, use_column_width=True) 
 def sidebar_bg(side_bg):
 
    side_bg_ext = 'jpg'
