@@ -12,8 +12,8 @@ if option == 'Tomato Yellow Leaf Curl disease':
     col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         st.header('Tomato Yellow Leaf Curl disease')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Tomato_Yellow_Leaf_Curl_Virus/0a0fe942-bb9e-4384-8466-779017d00bcf___UF.GRC_YLCV_Lab 02192.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Tomato_Yellow_Leaf_Curl_Virus/8b16cc37-30cc-4685-a5fd-6259d200451a___YLCV_NREC 2270.JPG')
+        image1 = Image.open('info_images/tomatoes_Tomato_Yellow_Leaf_Curl_Virus/1_ttycv.JPG')
+        image2 = Image.open('info_images/tomatoes_Tomato_Yellow_Leaf_Curl_Virus/2_ttylcv.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -31,8 +31,8 @@ if option == 'Tomato mosaic virus':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato mosaic virus')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Tomato_mosaic_virus/4ab92098-cb26-40ef-b145-fbd1cdde9bd5___PSU_CG 2392.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Tomato_mosaic_virus/bd22aa4a-ea90-41af-862d-7e887eb57a00___PSU_CG 2416.JPG')
+        image1 = Image.open('info_images/tomatoes_Tomato_mosaic_virus/1_ttmv.JPG')
+        image2 = Image.open('info_images/tomatoes_Tomato_mosaic_virus/2_ttmv.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -50,8 +50,8 @@ if option == 'Tomato Early blight':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Early blight')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Early_blight/0abc57ec-7f3b-482a-8579-21f3b2fb780b___RS_Erly.B 7609.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Early_blight/0db67be3-f733-4d15-b7d9-5d075b2cafc7___RS_Erly.B 6401.JPG')
+        image1 = Image.open('info_images/tomatoes_Early_blight/1_teb.JPG')
+        image2 = Image.open('info_images/tomatoes_Early_blight/2_teb.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -69,8 +69,8 @@ if option == 'Tomato Septoria leaf spot':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Septoria leaf spot')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Septoria_leaf_spot/0a5edec2-e297-4a25-86fc-78f03772c100___JR_Sept.L.S 8468.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Septoria_leaf_spot/0b23b869-cfa6-40d7-a683-f4637d91ebff___Matt.S_CG 1286.JPG')
+        image1 = Image.open('info_images/tomatoes_Septoria_leaf_spot/1_tsls.JPG')
+        image2 = Image.open('info_images/tomatoes_Septoria_leaf_spot/2_tsls.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -88,8 +88,8 @@ if option == 'Tomato Target Spot':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Target Spot')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Target_Spot/0cb83b4d-281d-4b8f-a52a-8178fa8af907___Com.G_TgS_FL 7928.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Target_Spot/64d22974-a348-47f8-811b-f68c58963c36___Com.G_TgS_FL 7887.JPG')
+        image1 = Image.open('info_images/tomatoes_Target_Spot/1_tts.JPG')
+        image2 = Image.open('info_images/tomatoes_Target_Spot/2_tts.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -107,8 +107,8 @@ if option == 'Tomato Bacterial Spot':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Bacterial Spot')
-        image1 = Image.open('CNN_Model/Tomatoes/train/tomatoes_Bacterial_spot/40688c11-791b-465a-9476-a5069e24a56f___GCREC_Bact.Sp 3064.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/train/tomatoes_Bacterial_spot/79466870-1413-4b75-93e6-31b827cfa3ac___GCREC_Bact.Sp 6043.JPG')
+        image1 = Image.open('info_images/tomatoes_Bacterial_spot/1_tbs.JPG')
+        image2 = Image.open('info_images/tomatoes_Bacterial_spot/2_tbs.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -126,8 +126,8 @@ if option == 'Tomato Late Blight':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Late Blight')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Late_blight/0a4b3cde-c83a-4c83-b037-010369738152___RS_Late.B 6985.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Late_blight/0b33d7a7-d017-4857-845a-874a004ccd26___RS_Late.B 4970.JPG')
+        image1 = Image.open('info_images/tomatoes_Late_blight/1_tlb.JPG')
+        image2 = Image.open('info_images/tomatoes_Late_blight/2_tlb.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -145,8 +145,8 @@ if option == 'Tomato Spider mites (Two-spotted spider mite)':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Spider mites (Two-spotted spider mite)')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Spider_mites Two-spotted_spider_mite/3ba4c514-567a-4e4b-9d22-9cf2a957e906___Com.G_SpM_FL 1198.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Spider_mites Two-spotted_spider_mite/0a714292-45d6-483a-bbd0-2eab8fe72888___Com.G_SpM_FL 1496.JPG')
+        image1 = Image.open('info_images/tomatoes_Spider_mites Two-spotted_spider_mite/1_tssm.JPG')
+        image2 = Image.open('info_images/tomatoes_Spider_mites Two-spotted_spider_mite/2_tssm.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
@@ -164,8 +164,8 @@ if option == 'Tomato Leaf Mold':
     col1, col2, col3 = st.columns( [1, 1, 1])
     with col1:
         st.header('Tomato Leaf Mold')
-        image1 = Image.open('CNN_Model/Tomatoes/Tomato___Leaf_Mold/0a9b3ff4-5343-4814-ac2c-fdb3613d4e4d___Crnl_L.Mold 6559.JPG')
-        image2 = Image.open('CNN_Model/Tomatoes/Tomato___Leaf_Mold/9445a483-85a6-465c-b9b0-1ff8bc519a43___Crnl_L.Mold 9035.JPG')
+        image1 = Image.open('info_images/tomatoes_Leaf_Mold/1_tlm.JPG')
+        image2 = Image.open('info_images/tomatoes_Leaf_Mold/2_tlm.JPG')
         st.image(image1)
         st.image(image2)
     with col2:
