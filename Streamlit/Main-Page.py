@@ -168,7 +168,7 @@ elif page_selection == 'About':
 
     from PIL import Image
     with st.container():
-        image = Image.open("C:/Users/user/Documents/GitHub/Tomato_Plant_Disease_Identification/Streamlit/Team.png")
+        image = Image.open("Team.png")
         st.image(image, use_column_width=True) 
 def sidebar_bg(side_bg):
 
